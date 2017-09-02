@@ -1,0 +1,51 @@
+from character_class import Character
+
+
+class Player(Character):
+	def __init__(self, name, hp, max_hp):
+		super().__init__(name, hp, max_hp)
+		self._loot = {}
+	
+	
+	@property
+	def loot(self):
+		if not self._loot:
+			print("empty bag")
+
+		else:
+			for key in self._loot:
+			#	print("This")
+				print("contents of loot: %s" %key, sep="\n")
+
+	@loot.setter
+	def loot(self, item):
+		print("inside loop")
+		if not self._loot:
+			print("empty bag1")
+			self._loot[item] = 1
+			print("After adding to bag")
+			return
+		
+		for key in self._loot:
+			if not self._loot[item]:
+			#if(key == item):
+				self._loot[item] += 1
+				print("key equals item")
+			else:
+				self._loot[item] = 1
+				print("key does not equal bag")
+		return self._loot
+
+	def show_contents(self):
+		#for key, value in self._loot:
+		for key in self._loot:
+			print("Item: %s, Amount: %d" %key, %self._loot.get(key))
+
+
+if __name__ == "__main__":
+	hero = Player("Johnny", 100, 200)
+	print(hero.name)
+	hero.loot = "gold"
+	hero.loot
+	hero.loot = "gold"
+	hero.show_contents() 		

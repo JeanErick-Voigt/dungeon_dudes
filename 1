@@ -1,0 +1,188 @@
+#! /usr/bin/env/ python3
+
+import sys
+from random import random
+from game_class.room_class import Room
+from game_class.monster_class import Monster
+from game_class.player_class import Player
+#from game_class import monster_class
+#from player_class import Player
+
+
+def get_monster(x):
+	file = "./game_stories/monsterfile.txt"
+	lis = [] 
+	listoflists = []
+	i = 0
+	new_line = ""
+	with open(file, 'r') as infile:
+		for line in infile:
+			if(line == " "):
+				continue
+			lis = line.split()
+			if(lis[0] != None and lis[0] == str(x)):
+				new_line = line[2:]
+				#print(new_line)
+	print(new_line)
+	return(new_line.lstrip())
+
+
+def random_choice():
+	x = 0
+	while(x < 1):
+		x = random()
+		x = (int(x * 100) % 18)
+	
+	return(x)
+
+
+def room_monsters(room_monster_count, random_num):
+	monster = Monster('a', 1, 1, 'med')
+	room_monster_list = []
+	for i in range(room_monster_count):
+		monster.name, monster.size =  get_monster(random_num)
+		room_monster_list.append(monster)
+	return(room_monster_list)
+	
+
+def set_initial_hp_values(monster):
+	#"".join((monster.size).split())
+	print(len(monster.size))
+#	print(monster.size)
+	print(type(monster.size))
+	if "small" in monster.size:
+		monster.hp = 1
+		monster.max_hp = 1
+	elif "medium" in monster.size:
+		monster.hp = 2
+		monster.max_hp = 2
+	else:
+		monster.hp = 3
+		monster.max_hp = 3
+	return(monster)
+	
+
+def initiative_roll():
+	player_roll = random()
+	player_roll = (int(player_roll * 100) % 6)
+	player_roll += 1
+	monster_roll = random()
+	monster_roll = (int(monster_roll * 100) % 6)
+	monster_roll += 1
+	print("Roll for initiative...")
+	print("You rolled a {0}, Monster rolled a {1}".format(player_roll, monster_roll))
+	if(player_roll > monster_roll):
+		print("You have won the initiative", end=" ")
+		print("You may choose to attack")
+		outcome = 1	
+	else:
+		print("you lost initiative and will be attacked")
+		outcome = -1
+	return(outcome)
+
+
+def game_choice(winner, turn):
+	print("""1. Attack
+2. RunAway
+3. Check_loot
+4. check_status
+5. Use_item
+6. Quit 
+7. Restart
+""")
+	select = 1
+	while(select and turn == 1):
+		ans = int(input())
+		if(winner == -1 and ans == 1):
+			print("You lost initiative and  can not attack first")
+			print("Please, select another option")
+		else:
+			select = 0
+	return(ans)
+
+
+def welcome():
+	loop = 1
+	print("Welcome to dungeons and dudes.")
+	print("Please enter a name or quit to exit")
+	while(loop):
+		ans = input()
+		if(len(ans) < 1):
+			print("please re-enter a name or enter 'default' for a default name")
+		elif(ans == "quit"):
+			print("You have chosen to exit. Are you sure? y or no >")
+			ans = input()
+			if(ans == "y"):
+				print("exiting...")
+				sys.exit()
+			else:
+				print("please re-enter your name")
+				continue
+		elif(ans == "default"):
+			ans = "Hero"
+			break
+		else:
+			None
+			loop = 0
+		print("Is {} really the name you want to use? y or no?".format(ans))
+		ans2 = input()
+		if(ans2 == "y"):
+			break
+		else:
+			continue
+
+	print("Hello {}, welcome to the game".format(ans))
+	return(ans)
+
+def amount_of_monsters():
+	num = int(random() * 100)
+	num = (num % 4) + 1
+	return(num)
+		
+
+if __name__ == "__main__":
+	x = 0
+	in_room = 1
+	room_num = 0
+	turn = 1
+	player_name = welcome()
+	while(room_num < 6):
+		room_num += 1
+		monster_number = amount_of_monsters()
+		winner = (initiative_roll())
+		while(in_room):
+			room_monsters(monster_number)
+			menu_selection = game_choice(winner, turn)
+			room_num = 8
+			in_room = 0
+
+	
+	random_num = random_choice()
+	monster_list = room_monsters(room_monster_count, random_num)
+	print(monster_list[0].name)
+	print(monster_list[1].name)
+
+
+	while(x < 1):
+		print("in while loop")
+		x = random()
+		x = (int(x * 100) % 18)
+
+	
+	print(x)
+	
+	monster1 = Monster("a", 1, 2, "sm")
+	#x = (int(x * 100) % 18)
+	print(x)
+	#print(get_monster(x))	
+	monster1.name, monster1.size = get_monster(x).split(" ")
+	#print(monster1.name)
+	#print(monster1.size)
+	#print(len(monster1.size))
+	#if(monster1.size == "small"):
+	#	print("size is small")
+	#set_initial_hp_values(monster1)
+	#monster1.show_info()
+	
+	#while(game):
+	#	room
