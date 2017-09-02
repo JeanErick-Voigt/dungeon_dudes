@@ -4,7 +4,7 @@ from game_class.monster_class import Monster
 
 
 class Room():
-
+	#room class imports monster class properties and designed to set the room
 	def __init__(self, room_number, num_of_monsters, monster_list):
 		self._room_number = room_number
 		self._num_of_monsters = num_of_monsters
@@ -26,6 +26,7 @@ class Room():
 
 	@property
 	def monster_list(self):
+		#get a list of monsters in room
 		print("In monster_list")
 		print(self._num_of_monsters)
 		for i in range(self._num_of_monsters):
@@ -43,6 +44,7 @@ class Room():
 
 	#@monster_list.setter
 	def monster_pop(self):
+		# pop off a monster from list
 		(self.list).pop(0)
 		(self._monster_list).pop(0)
 		self._num_of_monsters -= 1
