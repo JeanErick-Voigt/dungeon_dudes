@@ -9,42 +9,15 @@ class Monster(Character):
 		super().__init__(name, hp, max_hp)
 		self._size = size
 
-	#@property
-	#def name(self):
-	#	return self._name
-
-	#@name.setter
-	#def name(self, name):
-	#	self._name = name
-		
-	
-	
-	'''@property
-	def hp(self):
-		return self._hp
-	
-
-	@hp.setter
-	def hp(self, hp):
-		self._hp = hp
 
 	@property
-	def max_hp(self):
-		return self._max_hp
-		
-		
-
-	@max_hp.setter
-	def max_hp(self, max_hp):
-		self._max_hp = max_hp
-		#return self._max_hp
-'''
-	@property
+	# getter for size
 	def size(self):
 		return self._size
 
 
 	@size.setter
+	#setter for size
 	def size(self, size):
 		self._size = size
 		#return self._size
