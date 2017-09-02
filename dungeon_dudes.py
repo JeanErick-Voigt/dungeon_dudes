@@ -10,6 +10,7 @@ from game_class.player_class import Player
 
 
 def get_monster(x):
+	#function used to get the monsters from a text file
 	file = "./game_stories/monsterfile.txt"
 	lis = [] 
 	listoflists = []
@@ -28,6 +29,7 @@ def get_monster(x):
 
 
 def random_choice():
+	#function used to get a random number within the value
 	x = 0
 	while(x < 1):
 		x = random()
@@ -37,7 +39,7 @@ def random_choice():
 
 
 def room_monsters(room_monster_count):
-	#monster = Monster('a', 1, 1, 'med')
+	#appends random monsters to a list to be placed for each room
 	random_num = 0
 	room_monster_list = []
 	print("Room monsters function count {}".format(room_monster_count))
@@ -51,10 +53,7 @@ def room_monsters(room_monster_count):
 	
 
 def set_initial_hp_values(monster):
-#	" ".join((monster.size).split())
-	#print(len(monster.size))
-#	print(monster.size)
-#	print(type(monster.size))
+	#designed to set the initial hp and max_hp values
 	if "small" in monster.size:
 		monster.hp = 1
 		monster.max_hp = 1
@@ -68,6 +67,7 @@ def set_initial_hp_values(monster):
 	
 
 def initiative_roll():
+	#takes the initiative roll in order to see who gets the first turn
 	player_roll = random()
 	player_roll = (int(player_roll * 100) % 6)
 	player_roll += 1
@@ -87,6 +87,7 @@ def initiative_roll():
 
 
 def game_choice(winner, turn):
+	#makes a game choice to select what you want to do
 	print("please select from the following options")
 	print("""1. Attack
 2. RunAway
@@ -114,6 +115,7 @@ def game_choice(winner, turn):
 	return(ans)
 
 def turn_execution(choice):
+	#executes the game choice
 	my_turn = 1
 	print("This is choice %s" %choice)
 	while(my_turn):
@@ -136,6 +138,7 @@ def turn_execution(choice):
 			break
 
 def welcome():
+	#initial loop that initializes the name of the user to the program
 	loop = 1
 	print("Welcome to dungeons and dudes.")
 	print("Please enter a name or quit to exit")
@@ -169,6 +172,7 @@ def welcome():
 	return(ans)
 
 def attack():
+	#This is attack function.  
 	size = current_room.get_index_size(0)
 	print("This is size {}".format(size))
 	rolls = 0
@@ -240,6 +244,7 @@ def attack():
 
 
 def amount_of_monsters():
+	#returns the amount of monsters
 	num = int(random() * 100)
 	num = (num % 4) + 1
 	return(num)
