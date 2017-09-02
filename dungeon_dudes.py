@@ -5,8 +5,7 @@ from random import random
 from game_class.room_class import Room
 from game_class.monster_class import Monster
 from game_class.player_class import Player
-#from game_class import monster_class
-#from player_class import Player
+
 
 
 def get_monster(x):
